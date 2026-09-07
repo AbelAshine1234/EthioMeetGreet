@@ -1,14 +1,14 @@
 {
-  "name": "ethiomeetgreet-backend",
+  "name": "meetandgreet-backend",
   "version": "1.0.0",
   "description": "Cameo-style Meet and Greet Backend API",
   "main": "dist/server.js",
   "scripts": {
-    "build": "prisma generate && tsc",
+    "build": "npx prisma generate && tsc",
     "start": "node dist/server.js",
-    "dev": "prisma generate && ts-node-dev --respawn --transpile-only src/server.ts",
-    "prisma:generate": "prisma generate",
-    "prisma:push": "prisma db push"
+    "dev": "npx prisma generate && npx ts-node-dev --respawn --transpile-only src/server.ts",
+    "prisma:generate": "npx prisma generate",
+    "prisma:push": "npx prisma db push"
   },
   "dependencies": {
     "@prisma/client": "^5.19.1",

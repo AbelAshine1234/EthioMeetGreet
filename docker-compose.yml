@@ -1,9 +1,9 @@
-version: '3.8'
+name: meetandgreet
 
 services:
   db:
     image: postgres:16-alpine
-    container_name: ethiomeetgreet_db
+    container_name: meetandgreet_db
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
@@ -24,7 +24,8 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: ethiomeetgreet_backend
+    image: meetandgreet_backend:latest
+    container_name: meetandgreet_backend
     restart: unless-stopped
     ports:
       - "${PORT:-5050}:5000"
@@ -35,6 +36,7 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
+    command: sh -c "npm install && npm run dev"
     depends_on:
       db:
         condition: service_healthy
@@ -43,7 +45,8 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: ethiomeetgreet_frontend
+    image: meetandgreet_frontend:latest
+    container_name: meetandgreet_frontend
     restart: unless-stopped
     ports:
       - "3000:3000"
